@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMadeiras</title>
+    <link rel="stylesheet" href="./src/styles/root.css">
+    <link rel="stylesheet" href="./src/styles/home.css">
+</head>
+<body>
+    <header>
+        <ul>
+            <li class="about-us">
+                <a href="/about">Sobre Nós</a>
+            </li>
+            <li class="logo">
+                <a href="/"><img src="./src/assets/icons/logo.svg" alt="EcoMadeiras Logo"></a>
+            </li>
+            <li class="contact">
+                <a href="/contact">Contato</a>
+            </li>
+        </ul>
+    </header>
+    <main>
+<section class="apresentation" id="section-apresentation">
+        <h1>Bem-Vindo a EcoMadeiras</h1>
+        <h2>Apenas o melhor para você</h2>
+        
+        <div class="slide-indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+        </div>
+    </section>
+<section class="catalog-section">
+  <div class="catalog-container">
+    <h2 class="catalog-title">Nossos Produtos</h2>
+    <p class="catalog-subtitle">Móveis artesanais feitos com madeira sustentável e acabamento premium</p>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
+      <div class="carousel-track" id="productCarousel"></div>
+      <button class="carousel-btn next" aria-label="Próximo">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Sobre Nós</h2>
+                        <p>
+                              Nós somos a EcoMadeiras! Somos uma empresa dedicada à produção de móveis sustentáveis com o objetivo
+                              de minimizar o impacto ambiental e entregar qualidade aos nossos clientes. Nascemos em 2025, em Sumaré, com a
+                              missão de oferecer móveis que aliam design, funcionalidade e responsabilidade socioambiental. 
+                              Toda a madeira utilizada é proveniente de reflorestamento, e o processo produtivo prioriza o aproveitamento 
+                              de resíduos e a reciclagem de MDF pós-consumo. O catálogo inclui mesas, cadeiras, estantes, armários e 
+                              painéis, que recebem acabamentos diferenciados: garrafas PET no revestimento de painéis, plástico marinho 
+                              reciclado em mesas e cadeiras, além de fibra de coco para estantes e armários. Como parte do compromisso 
+                              socioambiental, 25% do valor das vendas é destinado a instituições que trabalham no combate às queimadas na 
+                              Amazônia.
+                        </p>
+                    </div>
+                    <img class="about-image" src="./src/assets/images/picture-company-2.svg" alt="Imagem sobre a empresa">
+                </div>
+            </div>
+        </section>
+        <section class="vision-section" id="about" style="background: f5f5f5;">
+            <div class="container">
+                <div class="vision-content">
+                    <img class="vision-image" src="./src/assets/images/picture-company-3.svg" alt="Imagem sobre a empresa">
+                    <div class="vision-text">
+                        <h2>Nossa visão</h2>
+                        <p>
+                              Ser reconhecida como referência em móveis sustentáveis, unindo qualidade, 
+                              design contemporâneo e responsabilidade ecológica. A meta é incentivar consumidores e 
+                              empresas a optarem por soluções conscientes, contribuindo para a preservação do meio 
+                              ambiente e para o fortalecimento de ações de impacto social positivo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+<script src="./src/js/header-animation.js"></script>
+<script src="./src/js/images-apresentation.js"></script>
+<script type="module">
+  import { products } from './src/js/productsData.js';
+  import { initCarousel } from './src/js/productsCarousel.js';
+  initCarousel(products);
+</script>
+</html>
