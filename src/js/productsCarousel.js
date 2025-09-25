@@ -53,63 +53,127 @@ export function initCarousel(products) {
     track.appendChild(card);
   });
 
-  const prevBtn = document.querySelector(".carousel-btn.prev");
-  const nextBtn = document.querySelector(".carousel-btn.next");
+  // === Selecionar botões (desktop e mobile) ===
+  const desktopPrevBtn = document.querySelector(".carousel-wrapper .carousel-btn.prev");
+  const desktopNextBtn = document.querySelector(".carousel-wrapper .carousel-btn.next");
+  const mobilePrevBtn = document.querySelector(".mobile-carousel-controls .carousel-btn.prev");
+  const mobileNextBtn = document.querySelector(".mobile-carousel-controls .carousel-btn.next");
   const slides = document.querySelectorAll(".product-slide");
 
   // === Cálculos de movimento ===
-  let index = 0;                       // posição atual
-  const visible = calcVisibleSlides();  // quantos cabem na tela
+  let index = 0;
+  const isMobile = () => window.innerWidth <= 768;
 
   function calcVisibleSlides() {
-    const containerWidth = document.querySelector(".carousel-wrapper").offsetWidth;
+    if (isMobile()) {
+      return 1; // Mobile sempre 1 slide por vez para scroll lateral
+    }
+    const containerWidth = document.querySelector(".carousel-wrapper").offsetWidth - 200; // padding dos botões
     const slideWidth = slides[0].offsetWidth + parseFloat(getComputedStyle(track).gap || 0);
     return Math.floor(containerWidth / slideWidth);
   }
 
+  // === Atualizar carrossel ===
   function updateCarousel() {
-    track.style.transform = `translateX(-${index * (slides[0].offsetWidth + 32)}px)`;
+    if (isMobile()) {
+      // Mobile: usar scroll smooth do browser
+      const slideWidth = slides[0].offsetWidth + 16; // largura + gap
+      track.scrollTo({
+        left: index * slideWidth,
+        behavior: 'smooth'
+      });
+    } else {
+      // Desktop: transform tradicional
+      const slideWidth = slides[0].offsetWidth + 32;
+      track.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
     checkButtons();
   }
 
   function checkButtons() {
-    // desativa quando não pode mais ir
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index >= slides.length - visible;
-    prevBtn.classList.toggle("disabled", prevBtn.disabled);
-    nextBtn.classList.toggle("disabled", nextBtn.disabled);
+    const visible = calcVisibleSlides();
+    const maxIndex = Math.max(0, slides.length - visible);
+    
+    // Atualizar botões desktop
+    if (desktopPrevBtn && desktopNextBtn) {
+      desktopPrevBtn.disabled = index === 0;
+      desktopNextBtn.disabled = index >= maxIndex;
+      desktopPrevBtn.classList.toggle("disabled", desktopPrevBtn.disabled);
+      desktopNextBtn.classList.toggle("disabled", desktopNextBtn.disabled);
+    }
+    
+    // Atualizar botões mobile
+    if (mobilePrevBtn && mobileNextBtn) {
+      mobilePrevBtn.disabled = index === 0;
+      mobileNextBtn.disabled = index >= maxIndex;
+      mobilePrevBtn.classList.toggle("disabled", mobilePrevBtn.disabled);
+      mobileNextBtn.classList.toggle("disabled", mobileNextBtn.disabled);
+    }
   }
 
-  // === Eventos ===
-  nextBtn.addEventListener("click", () => {
-    if (index < slides.length - visible) {
+  // === Função para ir para o próximo ===
+  function goNext() {
+    const visible = calcVisibleSlides();
+    const maxIndex = Math.max(0, slides.length - visible);
+    
+    if (index < maxIndex) {
       index++;
       updateCarousel();
     }
-  });
+  }
 
-  prevBtn.addEventListener("click", () => {
+  // === Função para ir para o anterior ===
+  function goPrev() {
     if (index > 0) {
       index--;
       updateCarousel();
     }
-  });
+  }
 
-  // Swipe em mobile
+  // === Eventos dos botões desktop ===
+  if (desktopNextBtn) {
+    desktopNextBtn.addEventListener("click", goNext);
+  }
+  
+  if (desktopPrevBtn) {
+    desktopPrevBtn.addEventListener("click", goPrev);
+  }
+
+  // === Eventos dos botões mobile ===
+  if (mobileNextBtn) {
+    mobileNextBtn.addEventListener("click", goNext);
+  }
+  
+  if (mobilePrevBtn) {
+    mobilePrevBtn.addEventListener("click", goPrev);
+  }
+
+  // === Touch/Swipe para mobile ===
   let startX = 0;
-  track.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  track.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
   track.addEventListener("touchend", e => {
+    if (!isMobile()) return;
+    
     let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50 && index < slides.length - visible) { index++; updateCarousel(); }
-    if (endX - startX > 50 && index > 0) { index--; updateCarousel(); }
-  });
+    let deltaX = startX - endX;
+    
+    // Mínimo de movimento para considerar swipe
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX > 0) { 
+        goNext(); 
+      } else { 
+        goPrev(); 
+      }
+    }
+  }, { passive: true });
 
-  // Ajusta em resize
+  // === Resize handler ===
   window.addEventListener("resize", () => {
+    // Reset para evitar problemas de layout
     index = 0;
     updateCarousel();
   });
 
-  // inicial
+  // === Inicialização ===
   updateCarousel();
 }

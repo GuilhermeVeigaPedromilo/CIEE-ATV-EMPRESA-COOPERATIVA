@@ -4,18 +4,9 @@
      background: #f8fafc;
  }
 
- /* Header */
  header {
      border-bottom: 1px solid #e2e8f0;
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     padding: 1rem 3rem;
      background: rgba(248, 250, 252, 0.95);
-     backdrop-filter: blur(10px);
-     z-index: 999;
-     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
  }
 
  header ul {
@@ -37,15 +28,6 @@
 
  header ul li a:hover {
      color: #8a7258;
- }
-
- header ul li.logo img {
-     height: 60px;
-     transition: transform 0.3s ease;
- }
-
- header ul li.logo img:hover {
-     transform: scale(1.05);
  }
 
  /* Main Content */
@@ -365,9 +347,6 @@
 
  /* Responsive */
  @media (max-width: 768px) {
-     header {
-         padding: 1rem 1.5rem;
-     }
 
      .container {
          padding: 0 1rem;
@@ -442,4 +421,10 @@
 
  .error h2 {
      margin-bottom: 1rem;
+ }
+
+ @media (max-width: 768px) {
+    .back-btn {
+        margin-top: 5rem;
+    }
  }

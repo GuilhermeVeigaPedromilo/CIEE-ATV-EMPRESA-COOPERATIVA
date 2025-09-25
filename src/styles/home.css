@@ -3,74 +3,6 @@ body {
   flex-direction: column;
 }
 
-header {
-  border-bottom: 1px solid #ccc;
-  position: fixed;
-  /* Fica fixo no topo */
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 0.5rem 3rem;
-  background: transparent;
-  /* Começa transparente */
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-  z-index: 999;
-}
-
-/* Fundo sólido quando a classe .scrolled é adicionada */
-header.scrolled {
-  background: rgba(214, 214, 214, 0.95);
-  /* Cor sólida (ajuste ao seu gosto) */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-}
-
-/* ======== NAV ======== */
-header ul {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-}
-
-/* Links */
-header ul li a {
-  color: #fff;
-  /* Cor do texto */
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-header ul li a:hover {
-  color: #836400;
-  /* Destaque no hover */
-}
-
-/* Logo centralizada */
-header ul li.logo img {
-  height: 100px;
-}
-
-header ul li.logo img:hover {
-  transform: scale(1.05);
-}
-
-/* Ajuste responsivo */
-@media (max-width: 768px) {
-  header {
-    padding: 15px 20px;
-  }
-
-  header ul li a {
-    font-size: 1rem;
-  }
-
-  header ul li.logo img {
-    height: 40px;
-  }
-}
-
 .apresentation {
   width: 100%;
   height: 95vh;
@@ -152,7 +84,6 @@ header ul li.logo img:hover {
   position: relative;
   overflow: hidden;
   padding: 0 50px;
-  /* espaço lateral para botões */
 }
 
 .carousel-track {
@@ -160,8 +91,6 @@ header ul li.logo img:hover {
   gap: 2rem;
   transition: transform 0.6s ease;
 }
-
-/* Adições ao CSS existente para melhorar os cards */
 
 .product-slide {
   min-width: 420px;
@@ -333,7 +262,6 @@ header ul li.logo img:hover {
   transform: none;
 }
 
-/* Efeito de hover no card quando indisponível */
 .product-slide:has(.out-of-stock) {
   opacity: 0.8;
 }
@@ -438,6 +366,239 @@ header ul li.logo img:hover {
 }
 
 
+/* === BOTÕES DESKTOP === */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(107, 86, 78, 0.85);
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 5;
+  user-select: none;
+}
+
+.carousel-btn:hover:not(.disabled) {
+  background: rgba(107, 86, 78, 1);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+.carousel-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* === RESPONSIVIDADE MOBILE === */
+@media (max-width: 768px) {
+  .carousel-wrapper {
+    padding: 0;
+    overflow: visible;
+  }
+  
+  .carousel-track {
+    gap: 1rem;
+    transition: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0 1rem;
+    margin: 0 -1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(138, 114, 88, 0.3) transparent;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .carousel-track::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .carousel-track::-webkit-scrollbar-thumb {
+    background: rgba(138, 114, 88, 0.3);
+    border-radius: 2px;
+  }
+  
+  .carousel-track::-webkit-scrollbar-thumb:hover {
+    background: rgba(138, 114, 88, 0.5);
+  }
+  
+  /* Slides mobile */
+  .product-slide {
+    flex: 0 0 85%;
+    min-width: min(320px, 85vw);
+    max-width: 380px;
+    min-height: 520px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    margin-right: 0;
+  }
+  
+  .carousel-indicators {
+    display: flex;
+  }
+  
+  .carousel-btn {
+    display: none !important;
+  }
+  
+  .slide-content {
+    padding: 1.5rem 1.2rem;
+  }
+  
+  .slide-content h3 {
+    font-size: 1.1rem;
+    min-height: 44px;
+  }
+  
+  .slide-content p {
+    font-size: 0.85rem;
+    min-height: 54px;
+  }
+  
+  .slide-price {
+    font-size: 1.3rem;
+  }
+  
+  .view-details-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* === MOBILE PEQUENO === */
+@media (max-width: 480px) {
+  .product-slide {
+    flex: 0 0 90%;
+    min-width: min(280px, 90vw);
+    max-width: 320px;
+  }
+  
+  .carousel-track {
+    padding: 0 0.5rem;
+    margin: 0 -0.5rem;
+  }
+}
+
+/* === TABLET === */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .carousel-wrapper {
+    padding: 0 60px;
+  }
+  
+  .product-slide {
+    min-width: 350px;
+    min-height: 560px;
+  }
+  
+  .carousel-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.6rem;
+  }
+  
+  .carousel-btn.prev {
+    left: 5px;
+  }
+  
+  .carousel-btn.next {
+    right: 5px;
+  }
+}
+
+/* === ANIMAÇÕES SUAVES === */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    scroll-behavior: auto;
+    transition: none;
+  }
+  
+  .product-slide {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .carousel-indicators .indicator {
+    transition: background 0.3s ease;
+  }
+}
+
+/* === ESTADOS DE FOCO PARA ACESSIBILIDADE === */
+.carousel-btn:focus {
+  outline: 2px solid #8a7258;
+  outline-offset: 2px;
+}
+
+.carousel-indicators .indicator:focus {
+  outline: 2px solid #8a7258;
+  outline-offset: 2px;
+}
+
+/* === MELHORIAS VISUAIS === */
+.carousel-track {
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-slide {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.slide-content * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* === LOADING STATE === */
+.carousel-track.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.carousel-track.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #8a7258;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
 /* About section */
 .about-section,
 .vision-section,
@@ -490,7 +651,6 @@ header ul li.logo img:hover {
   height: 50vh;
 }
 
-/* Estilos para a seção de contato melhorada */
 .contact-section {
   padding: 6rem 0;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -555,11 +715,9 @@ header ul li.logo img:hover {
   margin-bottom: 4rem;
 }
 
-/* Informações de Contato */
 .contact-info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .info-card {
@@ -891,22 +1049,6 @@ header ul li.logo img:hover {
   }
 }
 
-/* === HEADER MOBILE === */
-@media (max-width: 768px) {
-  header ul {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  header ul li {
-    text-align: center;
-  }
-
-  header ul li.logo img {
-    height: 60px;
-  }
-}
-
 /* === HERO SECTION === */
 @media (max-width: 768px) {
   .apresentation {
@@ -925,7 +1067,6 @@ header ul li.logo img:hover {
 }
 
 /* === SOBRE & VISÃO === */
-/* ===== Ajuste para telas menores - imagem entre título e texto ===== */
 @media (max-width: 768px) {
   /* Sobre Nós */
   .about-content {
