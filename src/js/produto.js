@@ -1,78 +1,31 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoMadeiras - Detalhes do Produto</title>
-    <link rel="stylesheet" href="../src/styles/root.css">
-    <link rel="stylesheet" href="../src/styles/produto.css">
-</head>
-<body>
-    <header>
-        <ul>
-            <li class="about-us">
-                <a href="./index.html#about">Sobre Nós</a>
-            </li>
-            <li class="logo">
-                <a href="./index.html"><img src="./src/assets/icons/logo.svg" alt="EcoMadeiras Logo"></a>
-            </li>
-            <li class="contact">
-                <a href="./index.html#contact">Contato</a>
-            </li>
-        </ul>
-    </header>
+// Importar dados dos produtos
+import { products } from './src/js/productsData.js';
 
-    <main>
-        <div class="container">
-            <a href="./index.html" class="back-btn">
-                <span>←</span> Voltar para catálogo
-            </a>
+// Função para obter ID do produto da URL
+function getProductIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    return id ? parseInt(id) : null;
+}
 
-            <div class="breadcrumb">
-                <a href="./index.html">Home</a>
-                <span>/</span>
-                <a href="./index.html#catalog">Produtos</a>
-                <span>/</span>
-                <span id="breadcrumb-product">Carregando...</span>
-            </div>
+// Função para encontrar produto pelo ID
+function findProductById(id) {
+    return products.find(product => product.id === id);
+}
 
-            <div id="product-content">
-                <div class="loading">
-                    <p>Carregando produto...</p>
-                </div>
-            </div>
-        </div>
-    </main>
+// Função para renderizar o produto
+function renderProduct(product) {
+    const breadcrumb = document.getElementById('breadcrumb-product');
+    breadcrumb.textContent = product.name;
 
-    <script type="module">
-        // Importar dados dos produtos
-        import { products } from './src/js/productsData.js';
+    const content = document.getElementById('product-content');
 
-        // Função para obter ID do produto da URL
-        function getProductIdFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            return id ? parseInt(id) : null;
-        }
+    const savings = product.originalPrice ?
+        Math.round(((parseFloat(product.originalPrice.replace('R$ ', '').replace('.', '').replace(',', '.')) -
+            parseFloat(product.price.replace('R$ ', '').replace('.', '').replace(',', '.'))) /
+            parseFloat(product.originalPrice.replace('R$ ', '').replace('.', '').replace(',', '.'))) * 100) : 0;
 
-        // Função para encontrar produto pelo ID
-        function findProductById(id) {
-            return products.find(product => product.id === id);
-        }
-
-        // Função para renderizar o produto
-        function renderProduct(product) {
-            const breadcrumb = document.getElementById('breadcrumb-product');
-            breadcrumb.textContent = product.name;
-
-            const content = document.getElementById('product-content');
-            
-            const savings = product.originalPrice ? 
-                Math.round(((parseFloat(product.originalPrice.replace('R$ ', '').replace('.', '').replace(',', '.')) - 
-                parseFloat(product.price.replace('R$ ', '').replace('.', '').replace(',', '.'))) / 
-                parseFloat(product.originalPrice.replace('R$ ', '').replace('.', '').replace(',', '.'))) * 100) : 0;
-
-            content.innerHTML = `
+    content.innerHTML = `
                 <div class="product-detail">
                     <div class="product-header">
                         <div class="product-gallery">
@@ -153,12 +106,12 @@
                     </div>
                 </div>
             `;
-        }
+}
 
-        // Função para renderizar erro
-        function renderError() {
-            const content = document.getElementById('product-content');
-            content.innerHTML = `
+// Função para renderizar erro
+function renderError() {
+    const content = document.getElementById('product-content');
+    content.innerHTML = `
                 <div class="error">
                     <h2>Produto não encontrado</h2>
                     <p>O produto que você está procurando não existe ou foi removido.</p>
@@ -167,48 +120,45 @@
                     </a>
                 </div>
             `;
-        }
+}
 
-        // Funções de ação
-        window.handlePurchase = function(productId) {
-            alert('Funcionalidade de orçamento será implementada em breve!\nEntre em contato conosco pelo WhatsApp para mais informações.');
-        };
+// Funções de ação
+window.handlePurchase = function (productId) {
+    alert('Funcionalidade de orçamento será implementada em breve!\nEntre em contato conosco pelo WhatsApp para mais informações.');
+};
 
-        window.handleContact = function(productId) {
-            const product = findProductById(parseInt(productId));
-            const message = `Olá! Tenho interesse no produto: ${product.name} (Código: ECO-${String(product.id).padStart(3, '0')})`;
-            const whatsappUrl = `https://wa.me/5519981617022?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        };
+window.handleContact = function (productId) {
+    const product = findProductById(parseInt(productId));
+    const message = `Olá! Tenho interesse no produto: ${product.name} (Código: ECO-${String(product.id).padStart(3, '0')})`;
+    const whatsappUrl = `https://wa.me/5519981617022?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+};
 
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Página carregada, iniciando busca do produto...');
-            
-            const productId = getProductIdFromURL();
-            console.log('ID do produto extraído da URL:', productId);
-            
-            if (!productId) {
-                console.error('ID do produto não encontrado na URL');
-                renderError();
-                return;
-            }
+// Inicialização
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Página carregada, iniciando busca do produto...');
 
-            console.log('Produtos disponíveis:', products);
-            const product = findProductById(productId);
-            console.log('Produto encontrado:', product);
-            
-            if (!product) {
-                console.error('Produto não encontrado com ID:', productId);
-                renderError();
-                return;
-            }
+    const productId = getProductIdFromURL();
+    console.log('ID do produto extraído da URL:', productId);
 
-            renderProduct(product);
-            
-            // Atualizar título da página
-            document.title = `${product.name} - EcoMadeiras`;
-        });
-    </script>
-</body>
-</html>
+    if (!productId) {
+        console.error('ID do produto não encontrado na URL');
+        renderError();
+        return;
+    }
+
+    console.log('Produtos disponíveis:', products);
+    const product = findProductById(productId);
+    console.log('Produto encontrado:', product);
+
+    if (!product) {
+        console.error('Produto não encontrado com ID:', productId);
+        renderError();
+        return;
+    }
+
+    renderProduct(product);
+
+    // Atualizar título da página
+    document.title = `${product.name} - EcoMadeiras`;
+});
