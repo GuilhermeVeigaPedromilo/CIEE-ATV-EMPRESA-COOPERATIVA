@@ -1,33 +1,78 @@
 // src/js/productsData.js
 export const products = [
   {
-    name: "Mesa de Jantar Rústica com 6 cadeiras",
-    description: "Mesa MDF com 6 cadeiras de madeira.",
+    id: 1,
+    name: "Mesa de Jantar Rústica Sustentável",
+    description: "Conjunto completo com mesa em MDF ecológico e 6 cadeiras de madeira reflorestada. Acabamento em verniz natural resistente à água.",
     price: "R$ 2.890,00",
-    image: "./src/assets/images/products-1.svg"
+    originalPrice: "R$ 3.200,00",
+    image: "./src/assets/images/products-1.svg",
+    category: "Sala de Jantar",
+    dimensions: "160x90x75cm",
+    material: "MDF Sustentável + Madeira de Reflorestamento",
+    warranty: "2 anos",
+    inStock: true,
+    discount: 10,
+    features: ["Resistente à água", "Madeira certificada", "Montagem inclusa"]
   },
   {
-    name: "Armário de MDF",
-    description: "Armário de MDF com 3 gavetas.",
-    price: "R$ 450,00",
-    image: "./src/assets/images/products-2.svg"
+    id: 2,
+    name: "Armário Multiuso EcoLine",
+    description: "Armário versátil com 3 gavetas amplas e estrutura reforçada. Ideal para quarto, escritório ou sala. Puxadores ergonômicos.",
+    price: "R$ 650,00",
+    originalPrice: "R$ 750,00",
+    image: "./src/assets/images/products-2.svg",
+    category: "Organização",
+    dimensions: "80x45x120cm",
+    material: "MDF Reciclado + Fibra de Coco",
+    warranty: "3 anos",
+    inStock: true,
+    discount: 13,
+    features: ["3 gavetas espaçosas", "Estrutura reforçada", "Acabamento premium"]
   },
   {
-    name: "Mesa de Centro de Apoio",
-    description: "Mesa de MDF para sala.",
-    price: "R$ 220,00",
-    image: "./src/assets/images/products-3.svg"
+    id: 3,
+    name: "Mesa de Centro Design Moderno",
+    description: "Mesa de centro com design contemporâneo e compartimento interno. Perfeita para salas modernas e espaços compactos.",
+    price: "R$ 420,00",
+    originalPrice: "R$ 480,00",
+    image: "./src/assets/images/products-3.svg",
+    category: "Sala de Estar",
+    dimensions: "100x60x40cm",
+    material: "MDF Premium + Plástico Marinho Reciclado",
+    warranty: "2 anos",
+    inStock: true,
+    discount: 12,
+    features: ["Compartimento interno", "Design moderno", "Fácil limpeza"]
   },
   {
-    name: "Balcão Multiuso",
-    description: "Balcão de MDF com 2 potas e 4 gavetas.",
-    price: "R$ 1400,00",
-    image: "./src/assets/images/products-4.svg"
+    id: 4,
+    name: "Balcão Gourmet Premium",
+    description: "Balcão multiuso com 2 portas e 4 gavetas. Ideal para cozinhas, salas de jantar ou espaços gourmet. Acabamento sofisticado.",
+    price: "R$ 1.680,00",
+    originalPrice: "R$ 1.900,00",
+    image: "./src/assets/images/products-4.svg",
+    category: "Cozinha",
+    dimensions: "150x45x85cm",
+    material: "MDF Ecológico + Revestimento PET Reciclado",
+    warranty: "3 anos",
+    inStock: true,
+    discount: 12,
+    features: ["4 gavetas + 2 portas", "Acabamento anti-riscos", "Pés niveladores"]
   },
   {
-    name: "Mesa em 'L' de Escritório",
-    description: "Mesa para escritório de MDF.",
-    price: "R$ 3.450,00",
-    image: "./src/assets/images/products-5.svg"
+    id: 5,
+    name: "Mesa Executiva em L Professional",
+    description: "Mesa em formato L para escritório com amplo espaço de trabalho. Inclui passagem para cabos e suporte para CPU.",
+    price: "R$ 2.890,00",
+    originalPrice: "R$ 3.200,00",
+    image: "./src/assets/images/products-5.svg",
+    category: "Escritório",
+    dimensions: "150x120x75cm",
+    material: "MDF Industrial + Fibra Natural",
+    warranty: "5 anos",
+    inStock: false,
+    discount: 10,
+    features: ["Formato em L", "Passagem de cabos", "Suporte para CPU incluso"]
   }
 ];
