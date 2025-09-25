@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoMadeiras - Detalhes do Produto</title>
-    <link rel="stylesheet" href="../src/styles/root.css">
-    <link rel="stylesheet" href="../src/styles/produto.css">
+    <link rel="icon" href="./src/assets/icons/favicon-logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./src/styles/root.css">
+    <link rel="stylesheet" href="./src/styles/style.css">
+    <link rel="stylesheet" href="./src/styles/produto.css">
 </head>
 <body>
     <header>
@@ -43,7 +45,99 @@
             </div>
         </div>
     </main>
+        <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <!-- Seção da Marca -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <!-- Substituir pelo seu logo.svg -->
+                        <img src="./src/assets/icons/logo.svg" alt="DecorBrazil Logo">
+                    </div>
+                    <p class="footer-description">
+                        Móveis sustentáveis com design contemporâneo. Comprometidos com a qualidade,
+                        responsabilidade ambiental e impacto social positivo desde 2025.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                        <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
+                        <a href="#" class="social-link" aria-label="YouTube">📹</a>
+                    </div>
+                </div>
 
+                <!-- Produtos -->
+                <div class="footer-section">
+                    <h4>Produtos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Mesa de Jantar</a></li>
+                        <li><a href="#">Armários</a></li>
+                        <li><a href="#">Mesa de Centro</a></li>
+                        <li><a href="#">Balcões</a></li>
+                        <li><a href="#">Mesa de Escritório</a></li>
+                        <li><a href="#">Estantes</a></li>
+                        <li><a href="#">Projetos Personalizados</a></li>
+                    </ul>
+                </div>
+
+                <!-- Empresa -->
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#">Nossa Visão</a></li>
+                        <li><a href="#">Sustentabilidade</a></li>
+                        <li><a href="#">Certificações</a></li>
+                        <li><a href="#">Parceiros</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>Sumaré, São Paulo - SP</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <a href="https://wa.me/5519981617022">(19) 99999-9999</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <a href="mailto:contato@DecorBrazil.com.br">contato@DecorBrazil.com.br</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🕒</span>
+                            <span>Seg-Sex: 8h às 18h<br>Sáb: 8h às 12h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter">
+                <h4>📬 Fique por dentro das novidades</h4>
+                <p>Receba ofertas especiais, lançamentos e dicas de decoração sustentável</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Seu melhor e-mail">
+                    <button type="submit" class="newsletter-btn">Inscrever-se</button>
+                </form>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 DecorBrazil. Todos os direitos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script type="module">
         // Importar dados dos produtos
         import { products } from './src/js/productsData.js';
